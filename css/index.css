@@ -1,0 +1,22 @@
+
+
+.content{
+    background-image: url("https://images.wallpaperscraft.com/image/lake_mountains_house_136973_1920x1080.jpg") !important;
+    background-size: cover;
+    height: 100vh;
+}
+
+.navbar-text{
+    color: black;;
+}
+
+.searchform{
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.mt-0, .my-0 {
+
+    margin: 10px !important;
+    width: 15%;
+
+}
