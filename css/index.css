@@ -10,13 +10,19 @@
     color: black;;
 }
 
-.searchform{
-    background-color: rgba(255, 255, 255, 0.4);
+.dnavbar{
+    margin-bottom: 30vh;
 }
 
-.mt-0, .my-0 {
+.searchform{
+    background-color: rgba(255, 255, 255, 0.384);
+    height: 100px;
+    padding: 30px;
+}
+
+/* .mt-0, .my-0, .form-control, .button {
 
     margin: 10px !important;
     width: 15%;
 
-}
+} */
