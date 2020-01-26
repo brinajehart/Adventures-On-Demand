@@ -75,7 +75,8 @@
         $scope.CurrentDest= "";
         $scope.DesiredDest= "";
         $scope.alertClick= function(){
-          alert("Your location: " + $scope.CurrentDest + ",\nDesired location: " + $scope.DesiredDest);
+          fetch(`/api-get-location/${$scope.CurrentDest}/${$scope.DesiredDest}`).then(res => res.json()).then(res => console.log(res))
+          //alert("Your location: " + $scope.CurrentDest + ",\nDesired location: " + $scope.DesiredDest);
         }
     });
   </script>
