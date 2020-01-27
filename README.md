@@ -1,6 +1,6 @@
 # Adventures-On-Demand
 
-For travellers.
+**For travellers**
 
 ![alt text](https://github.com/BrinaJEHART/Adventures-On-Demand/blob/master/Homepage.png)
 
