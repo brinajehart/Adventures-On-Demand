@@ -4,7 +4,7 @@
 
 ## Built With
 
-* [angluarJS](https://angularjs.org)
+* [AngluarJS](https://angularjs.org)
 * [jQuery](https://jquery.com)
 
 ## Author
