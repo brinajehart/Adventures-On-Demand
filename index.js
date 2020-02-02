@@ -40,6 +40,7 @@ function getLocationWeather(_location) {
 
 //app routes
 app.get('/', (req, res) => res.sendFile(path.join(views + '/index.html')));
+app.get('/doc', (req, res) => res.sendFile(path.join(views + '/doc.html')));
 app.get('/api-get-location/:CurrentDest/:DesiredDest', async (req, res) => {
     let currentDest = req.params.CurrentDest;
     let desiredDest = req.params.DesiredDest;

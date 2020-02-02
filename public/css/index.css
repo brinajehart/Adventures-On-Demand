@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
+* { font-family: 'Montserrat', sans-serif; }
 
 .content{
     background-image: url("https://images.wallpaperscraft.com/image/lake_mountains_house_136973_1920x1080.jpg") !important;
@@ -25,14 +27,30 @@
     font-size: 1.2em !important;
 }
 
-/* .mt-0, .my-0, .form-control, .button {
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    margin: 10px !important;
-    width: 15%;
+.footer{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    top: 195vh;
+    height: 5vh;
+    width: 100%;
+    color: #6c757d!important;
+    background-color: rgba(0,0,0,.03);
+}
 
-} */
+.contentaftersearch{
+   
+}
 
-/* Animation */
+/* Loading Animation */
   
 /* Absolute Center Spinner */
 .loading {
