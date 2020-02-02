@@ -18,6 +18,7 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js%22%3E"></script>
   <title>Adventures On Demand</title>
 </head>
 
@@ -25,67 +26,109 @@
 
   <div class="content">
 
-      <div class="dnavbar">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #ffffffcf !important";>
-            <a href="index.html">
-              <img src="public/images/plane.png" alt="logo" width="50px" height="50px">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-              aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Pricing</a>
-                </li>
-              </ul>
-              <span class="navbar-text" style="color: black !important">
-                Adventures on demand
-              </span>
-            </div>
-          </nav>
+    <div class="dnavbar">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #ffffffcf !important" ;>
+        <a href="#">
+          <img src="public/images/plane.png" alt="logo" width="50px" height="50px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+          </ul>
+          <span class="navbar-text" style="color: black !important">
+            Adventures on demand
+          </span>
         </div>
-<!-- Search form -->
-<div class="searchform">
-
-<div class="container">
-    <div class="row">
-      <div class="col-sm md-form mt-0">
-          <input class="form-control" type="text" ng-model="CurrentDest" placeholder="Insert your destination" aria-label="Search">
-      </div>
-      <div class="col-sm md-form mt-0">
-          <input class="form-control" type="text" ng-model="DesiredDest"  placeholder="Insert desired destination" aria-label="Search">
-      </div>
-      <div class="col-sm">
-          <button class="btn btn-primary" ng-click="alertClick()" style="width: 70%; height: 3rem; font-size: 1.2em;"> Search </button>
-      </div>
+      </nav>
     </div>
-  </div>
+    <!-- Search form -->
+    <div class="searchform">
 
-  <script>
-    var app = angular.module('myApp', []);
-    app.controller('myCtrl', function($scope) {
-        $scope.CurrentDest= "";
-        $scope.DesiredDest= "";
-        $scope.alertClick= function(){
-          fetch(`/api-get-location/${$scope.CurrentDest}/${$scope.DesiredDest}`).then(res => res.json()).then(res => console.log(res))
-          //alert("Your location: " + $scope.CurrentDest + ",\nDesired location: " + $scope.DesiredDest);
-        }
-    });
-  </script>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm md-form mt-0">
+            <input class="form-control" type="text" ng-model="CurrentDest" placeholder="Insert your destination"
+              aria-label="Search">
+          </div>
+          <div class="col-sm md-form mt-0">
+            <input class="form-control" type="text" ng-model="DesiredDest" placeholder="Insert desired destination"
+              aria-label="Search">
+          </div>
+          <div class="col-sm">
+            <button class="btn btn-primary" ng-click="alertClick()" style="width: 70%; height: 3rem; font-size: 1.2em;">
+              Search </button>
+          </div>
+        </div>
+      </div>
 
-</div>
+      <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+          $scope.CurrentDest = "";
+          $scope.DesiredDest = "";
+          $scope.locations = [];
+          $scope.alertClick = function () {
+            debugger
+            fetch(`/api-get-location/${$scope.CurrentDest}/${$scope.DesiredDest}`).then(res => res.json()).then(res => {
+            })
+            const element = document.getElementById('DisplayInformation');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' })
+            }
+          }
+        });
+      </script>
 
-  <div class="contentaftersearch">
+    </div>
 
-  </div>
+    <div class="contentaftersearch" style="position: absolute; top:100vh; height: 95vh; padding: 40px; width: 100%;">
+
+      <h1 id="DisplayInformation" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Adventures ready for you!</h1>
+
+      <div ng-repeat="location in locations track by $index">
+        <div class="card mb-3" style="width: 100%; border: 0px !important;">
+          <div class="row no-gutters">
+            <div class="col-md-2">
+              <img src="https://image.flaticon.com/icons/png/512/235/235861.png" class="card-img" alt="image">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                  content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <!-- <ul class="list-group list-group-flush" style="width: 100%;">
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+      </ul> -->
+
+    </div>
+
+    <div class="footer" style="position: absolute; top: 195vh; height: 5vh;">
+      <p>footer baje</p>
+    </div>
+
 </body>
 
 </html>
