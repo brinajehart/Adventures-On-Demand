@@ -18,12 +18,11 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js%22%3E"></script>
   <title>Adventures On Demand</title>
 </head>
 
 <body ng-app="myApp" ng-controller="myCtrl">
-
+  <div ng-if="loading" class="loading">Loading&#8230;</div>
   <div class="content">
 
     <div class="dnavbar">
@@ -78,16 +77,17 @@
         app.controller('myCtrl', function ($scope) {
           $scope.CurrentDest = "";
           $scope.DesiredDest = "";
-          $scope.locations = [1,2,3];
+          $scope.locations = [];
+          $scope.loading = false;
           $scope.alertClick = function () {
-            debugger
+            $scope.loading=true;
             fetch(`/api-get-location/${$scope.CurrentDest}/${$scope.DesiredDest}`).then(res => res.json()).then(res => {
-              if("legitResult" in res){
+              if ("legitResult" in res) {
                 $scope.locations = res.legitResult;
-                console.log(res.legitResult);
-                debugger;
+                $scope.loading=false;
+                $scope.$apply();
               }
-            })
+            });
             const element = document.getElementById('DisplayInformation');
             if (element) {
               element.scrollIntoView({ behavior: 'smooth' })
@@ -98,26 +98,27 @@
 
     </div>
 
-    <div class="contentaftersearch" style="position: absolute; top:100vh; height: 95vh; padding: 40px; width: 100%;">
+    <div class="contentaftersearch" style="position: absolute; top:100vh; height: 95vh; padding: 30px; width: 100%;">
 
-      <h1 id="DisplayInformation" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Adventures ready for you!</h1>
+      <h1 id="DisplayInformation" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Adventuresready for you!</h1>
 
-      <div ng-repeat="location in locations">
-        <div class="card mb-3" style="width: 100%; border: 0px !important;">
-          <div class="row no-gutters">
-            <div class="col-md-2">
-              <img src="https://image.flaticon.com/icons/png/512/235/235861.png" class="card-img" alt="image">
+      <div ng-repeat="loc in locations track by $index">
+        <div class="card mb-3" style="width: 100%; border: 0px !important; height: 90px !important; margin: 10px">
+          <div class="row no-gutters" style="height: 90px !important">
+            <div class="col-md-2" style="height: 90px !important; max-width: 8% !important; margin-top: 40px !important;">
+              <img style="height: 90px !important" src="https://image.flaticon.com/icons/png/512/235/235861.png"
+                class="card-img" alt="image">
             </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                  content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <div class="col-md-8" style="height: 90px !important">
+              <div class="card-body" style="height: 90px !important">
+                <h5 class="card-title">{{ loc.ime }}</h5>
+                <p class="card-text" >{{ loc.vreme }} <br> {{"Temp: " + loc.temperatura + "°C"}}</p>
+                <p class="card-text"><small class="text-muted">{{ "Zemljepisna visina: " + loc.zemljepisna_visina + ", Zemljepisna sirina: " + loc.zemljepisna_sirina}}</small></p>
               </div>
             </div>
           </div>
         </div>
+        <br />
         <hr>
       </div>
       <!-- <ul class="list-group list-group-flush" style="width: 100%;">
