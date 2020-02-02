@@ -78,10 +78,15 @@
         app.controller('myCtrl', function ($scope) {
           $scope.CurrentDest = "";
           $scope.DesiredDest = "";
-          $scope.locations = [];
+          $scope.locations = [1,2,3];
           $scope.alertClick = function () {
             debugger
             fetch(`/api-get-location/${$scope.CurrentDest}/${$scope.DesiredDest}`).then(res => res.json()).then(res => {
+              if("legitResult" in res){
+                $scope.locations = res.legitResult;
+                console.log(res.legitResult);
+                debugger;
+              }
             })
             const element = document.getElementById('DisplayInformation');
             if (element) {
@@ -97,7 +102,7 @@
 
       <h1 id="DisplayInformation" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Adventures ready for you!</h1>
 
-      <div ng-repeat="location in locations track by $index">
+      <div ng-repeat="location in locations">
         <div class="card mb-3" style="width: 100%; border: 0px !important;">
           <div class="row no-gutters">
             <div class="col-md-2">
