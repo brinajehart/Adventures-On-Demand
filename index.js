@@ -64,7 +64,7 @@ app.get('/api-get-location/:CurrentDest/:DesiredDest', async (req, res) => {
         });
     }
     res.status(200).json({
-        legitResult
+        legitResult.length > 5 ? legitResult.slice(0,5) : legitResult
     })
 
 });
